@@ -51,6 +51,7 @@ public class TestTest {
     }
     driver.findElement(By.id("clickMe")).click();
     driver.findElement(By.id("clickMe")).click();
+    System.out.println(driver.findElement(By.id("clicks")).getText());
     assertThat(driver.findElement(By.id("clicks")).getText(), is("15"));
   }
 }
