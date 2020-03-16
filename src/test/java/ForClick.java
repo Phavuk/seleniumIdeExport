@@ -12,6 +12,7 @@ public class ForClick {
         public void setUp(){
             System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
             driver = new ChromeDriver();
+            driver.manage().window().maximize();
             
         }
         @Test
@@ -19,20 +20,38 @@ public class ForClick {
             driver.get(BASE_URL);
             driver.findElement(By.id("clicks")).getText();
             System.out.println(driver.findElement(By.id("clicks")).getText());
-            Assert.assertEquals("0",driver.findElement(By.id("clicks")).getText());
+            Assert.assertEquals("klikov",driver.findElement(By.className("description")).getText());
+            System.out.println(driver.findElement(By.className("description")).getText());
 
-            driver.findElement(By.id("clickMe")).click();
-            Assert.assertEquals("1",driver.findElement(By.id("clicks")).getText());
-            driver.findElement(By.id("clickMe")).click();
-            Assert.assertEquals("Initialny pocet klikov","2",driver.findElement(By.id("clicks")).getText());
-            driver.findElement(By.id("clickMe")).click();
-            Assert.assertEquals("Initialny pocet klikov","3",driver.findElement(By.id("clicks")).getText())
-            ;driver.findElement(By.id("clickMe")).click();
-            Assert.assertEquals("Initialny pocet klikov","4",driver.findElement(By.id("clicks")).getText());
+
 
 
 
         }
+        @Test
+        public void gramTest(){
+            driver.get(BASE_URL);
+            driver.findElement(By.className("description"));
+
+            for (int i = 1; i <= 5 ; i++) {
+                driver.findElement(By.id("clickMe")).click();
+                Assert.assertEquals(String.valueOf(i),driver.findElement(By.id("clicks")).getText());
+                System.out.println(driver.findElement(By.className("description")).getText());
+                if (i == 1){
+                    Assert.assertEquals("klik",driver.findElement(By.className("description")).getText());
+                }
+
+                if (i > 1 && i < 5  ){
+                    Assert.assertEquals("kliky",driver.findElement(By.className("description")).getText());
+                }
+                if (i > 4){
+                    Assert.assertEquals("klikov",driver.findElement(By.className("description")).getText());
+                }
+
+            }
+
+        }
+
         @After
         public void tearDown(){
 
