@@ -2,6 +2,8 @@ import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 
+import java.util.*;
+
 public class TableList {
     private WebDriver driver;
     private final String BASE_URL = ("http://localhost/tabulka.php");
@@ -23,6 +25,18 @@ public class TableList {
             System.out.println(driver.findElement(By.xpath("//table/tbody/tr["+i+"]/td[3]")).getText());
             Assert.assertFalse(driver.findElement(By.xpath("//table/tbody/tr["+i+"]/td[3]")).getText().isEmpty());
 
+        }
+    }
+
+    @Test
+    public void elementsTest(){
+        driver.get(BASE_URL);
+        List<WebElement> rows= driver.findElements(By.xpath("//table/tbody/tr"));
+       // System.out.println(rows);
+        for (WebElement row : rows){
+            //System.out.println(row.getText());
+            System.out.println(row.findElement(By.xpath("//table/tbody/tr/td[3]")).getText());
+            Assert.assertFalse(row.findElement(By.xpath("//table/tbody/tr/td[3]")).getText().isEmpty());
         }
     }
 
